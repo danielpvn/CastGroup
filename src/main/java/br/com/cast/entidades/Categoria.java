@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "categoria")
-@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
+
 public class Categoria {
 	
 	@Id

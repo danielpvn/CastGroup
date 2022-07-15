@@ -92,6 +92,11 @@ public class CursoService {
 		if (curso.getDataInicio().isBefore(LocalDate.now())) {
 			throw new ErroDeNegocioException("ERRO, data de inicio menor que a data atual");
 		}
+		for (Curso var : repository.findAll()) {
+            if (var.getDescricao().equals(curso.getDescricao())) {
+                throw new RuntimeException("Curso já cadastrado");
+            }
+        }
 		Long countcurso = repository.consultaDatas(curso.getDataInicio(), curso.getDataTermino());
 		if (countcurso > 0) {
 			throw new ErroDeNegocioException("Existe(m) curso(s) planejados(s) dentro do período informado.");

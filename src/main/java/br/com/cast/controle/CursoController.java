@@ -54,9 +54,14 @@ public class CursoController {
 	// METODO DE INSERIR CURSOS
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> gravar(@RequestBody Curso curso) {
-		service.gravar(curso);
-		LOGGER.info("Curso inserido");
-		return ResponseEntity.ok().body("Cadastrado com Sucesso");
+		try {
+			service.gravar(curso);
+			LOGGER.info("Curso inserido");
+			return ResponseEntity.ok().body("Cadastrado com Sucesso");
+		} catch (Exception e) {
+			return ResponseEntity.internalServerError().body(e.getMessage());
+		}
+		
 	}
 	
 //========================================================================================================
